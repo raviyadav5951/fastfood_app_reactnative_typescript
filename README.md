@@ -1,8 +1,104 @@
-# Welcome to your Expo app 👋
+# Food Delivery App - React Native with TypeScript
 
-This is an [Expo](https://expo.dev) project created with [`create-expo-app`](https://www.npmjs.com/package/create-expo-app).
+A modern food delivery application built with React Native, TypeScript, and Expo Router.
 
-## Get started
+## Project Structure
+
+```
+app/
+├── _layout.tsx          # Root layout (Shared UI/Logic across all routes)
+├── index.tsx           # Home screen with food offers
+├── (auth)/             # Auth route group
+│   ├── _layout.tsx     # Auth layout (Shared UI/Logic for auth screens)
+│   ├── sign-in.tsx     # Sign in screen
+│   └── sign-up.tsx     # Sign up screen
+└── (tabs)/             # Tabs route group
+    ├── _layout.tsx     # Tabs layout (Tab navigation configuration)
+    ├── cart.tsx        # Cart screen
+    ├── profile.tsx     # Profile screen
+    └── search.tsx      # Search screen
+```
+
+## Layout System
+
+Expo Router uses a powerful layout system with the `Slot` component for nested routing:
+
+### Understanding Slots
+
+The `Slot` component in Expo Router is a special component that:
+
+- Acts as a placeholder for child routes
+- Enables nested layouts without prop drilling
+- Allows shared UI elements across routes
+
+Example of a layout with Slot:
+
+```tsx
+import { Slot } from "expo-router";
+
+export default function Layout() {
+  return (
+    <View style={styles.container}>
+      <Header /> {/* Shared across all child routes */}
+      <Slot /> {/* Child routes render here */}
+      <Footer /> {/* Shared across all child routes */}
+    </View>
+  );
+}
+```
+
+### Layout Hierarchy
+
+Our app uses three levels of layouts:
+
+1. **Root Layout** (`app/_layout.tsx`)
+   - Applies to all routes
+   - Sets up global providers
+   - Handles authentication state
+
+2. **Auth Layout** (`app/(auth)/_layout.tsx`)
+   - Specific to authentication screens
+   - Handles auth-specific UI/logic
+   - Groups sign-in and sign-up screens
+
+3. **Tabs Layout** (`app/(tabs)/_layout.tsx`)
+   - Manages bottom tab navigation
+   - Shared UI for authenticated screens
+   - Controls tab-specific behavior
+
+## Features
+
+- **Expo Router**:
+  - File-based routing with shared routes
+  - Nested layouts using Slot component
+  - Route grouping for better organization
+- **Authentication Flow**:
+  - Protected routes using route groups
+  - Dedicated auth layout with shared UI
+  - Seamless auth state management
+- **Navigation Structure**:
+  - Bottom tab navigation in (tabs) group
+  - Shared headers and footers using layouts
+  - Type-safe navigation with TypeScript
+- **Styling**:
+  - NativeWind (Tailwind CSS) for consistent styling
+  - Responsive design patterns
+  - Theme customization
+- **Component Architecture**:
+  - Reusable components in `components/` directory
+  - Memoized components for better performance
+  - Shared layouts for route groups
+
+## Route Groups
+
+This project uses Expo Router's route grouping feature for better organization of navigation flows:
+
+- `(auth)`: Groups authentication-related screens
+  - Separates auth flow from main app flow
+  - Handles sign-in and sign-up screens
+  - Uses shared layout for auth screens
+
+## Getting Started
 
 1. Install dependencies
 
@@ -35,16 +131,28 @@ npm run reset-project
 
 This command will move the starter code to the **app-example** directory and create a blank **app** directory where you can start developing.
 
-## Learn more
+## Tech Stack
 
-To learn more about developing your project with Expo, look at the following resources:
+- React Native with TypeScript
+- Expo & Expo Router
+- NativeWind (Tailwind CSS)
+- React Native Safe Area Context
 
-- [Expo documentation](https://docs.expo.dev/): Learn fundamentals, or go into advanced topics with our [guides](https://docs.expo.dev/guides).
-- [Learn Expo tutorial](https://docs.expo.dev/tutorial/introduction/): Follow a step-by-step tutorial where you'll create a project that runs on Android, iOS, and the web.
+## Best Practices
 
-## Join the community
+- File-based routing with Expo Router
+- Route grouping for better navigation organization
+- Shared layouts for related screens
+- Component reusability and memoization
+- Type safety with TypeScript
+- Responsive design with NativeWind
 
-Join our community of developers creating universal apps.
+## Learn More
 
-- [Expo on GitHub](https://github.com/expo/expo): View our open source platform and contribute.
-- [Discord community](https://chat.expo.dev): Chat with Expo users and ask questions.
+- [Expo Router Documentation](https://docs.expo.dev/router/introduction/): Learn about file-based routing
+- [NativeWind Documentation](https://www.nativewind.dev/): Learn about Tailwind CSS in React Native
+- [TypeScript Documentation](https://www.typescriptlang.org/docs/): Learn about TypeScript
+
+## Project Status
+
+🚧 Under Development
